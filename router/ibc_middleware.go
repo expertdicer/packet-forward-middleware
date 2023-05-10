@@ -143,6 +143,8 @@ func (im IBCMiddleware) OnRecvPacket(
 
 	m := &types.PacketMetadata{}
 	err := json.Unmarshal([]byte(data.Memo), m)
+	fmt.Println("err :", err)
+	fmt.Println("forward", m.Forward)
 	if err != nil || m.Forward == nil {
 		fmt.Println("here ?")
 		// not a packet that should be forwarded
