@@ -211,7 +211,7 @@ func (k *Keeper) ForwardTransferPacket(
 	packetAmount := token.Amount.Sub(feeAmount)
 	feeCoins := sdk.Coins{sdk.NewCoin(token.Denom, feeAmount)}
 	packetCoin := sdk.NewCoin(token.Denom, packetAmount)
-
+	fmt.Println("lmaoao")
 	// pay fees
 	if feeAmount.IsPositive() {
 		hostAccAddr, err := sdk.AccAddressFromBech32(receiver)
