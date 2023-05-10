@@ -128,6 +128,7 @@ func (im IBCMiddleware) OnRecvPacket(
 	packet channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) ibcexported.Acknowledgement {
+	fmt.Println("tesstt 1")
 	var data transfertypes.FungibleTokenPacketData
 	if err := transfertypes.ModuleCdc.UnmarshalJSON(packet.GetData(), &data); err != nil {
 		return channeltypes.NewErrorAcknowledgement(err)
@@ -143,6 +144,7 @@ func (im IBCMiddleware) OnRecvPacket(
 	m := &types.PacketMetadata{}
 	err := json.Unmarshal([]byte(data.Memo), m)
 	if err != nil || m.Forward == nil {
+		fmt.Println("here ?")
 		// not a packet that should be forwarded
 		im.keeper.Logger(ctx).Debug("packetForwardMiddleware OnRecvPacket forward metadata does not exist")
 		return im.app.OnRecvPacket(ctx, packet, relayer)
@@ -217,7 +219,7 @@ func (im IBCMiddleware) OnRecvPacket(
 	} else {
 		retries = im.retriesOnTimeout
 	}
-
+	fmt.Println("tesstt 3")
 	err = im.keeper.ForwardTransferPacket(ctx, nil, packet, data.Sender, data.Receiver, metadata, token, retries, timeout, []metrics.Label{}, nonrefundable)
 	if err != nil {
 		return channeltypes.NewErrorAcknowledgement(err)
