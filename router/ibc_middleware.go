@@ -184,6 +184,7 @@ func (im IBCMiddleware) OnRecvPacket(
 	// underlying app, otherwise the transfer module's OnRecvPacket callback could be invoked more than once
 	// which would mint/burn vouchers more than once
 	if !processed {
+		fmt.Println("process")
 		ack := im.app.OnRecvPacket(ctx, packet, relayer)
 		if ack == nil || !ack.Success() {
 			return ack
