@@ -251,6 +251,7 @@ func (k *Keeper) ForwardTransferPacket(
 		uint64(ctx.BlockTime().UnixNano())+uint64(timeout.Nanoseconds()),
 		memo,
 	)
+	fmt.Println("lmaoooaoaoa")
 
 	k.Logger(ctx).Debug("packetForwardMiddleware ForwardTransferPacket",
 		"port", metadata.Port, "channel", metadata.Channel,
@@ -263,6 +264,7 @@ func (k *Keeper) ForwardTransferPacket(
 		sdk.WrapSDKContext(ctx),
 		msgTransfer,
 	)
+	fmt.Println("success")
 	if err != nil {
 		k.Logger(ctx).Error("packetForwardMiddleware ForwardTransferPacket error",
 			"port", metadata.Port, "channel", metadata.Channel,
